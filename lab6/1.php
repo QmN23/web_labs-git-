@@ -5,7 +5,7 @@
 $url = "https://jsonplaceholder.typicode.com/posts/1";
 $ch = curl_init($url);
 
-// Настройка параметров для GET-запроса
+// Устанавливаем URL-адрес
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -58,7 +58,6 @@ $newData = [
 $url = "https://jsonplaceholder.typicode.com/posts/1";
 $ch = curl_init($url);
 
-// Настройка параметров для PUT-запроса
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
@@ -74,7 +73,6 @@ echo "PUT Response:\n$ex\n";
 // === DELETE-запрос ===
 $ch = curl_init($url);
 
-// Настройка параметров для DELETE-запроса
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
