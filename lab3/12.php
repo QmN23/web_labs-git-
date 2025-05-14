@@ -1,6 +1,5 @@
 <?php
 
-
 // 1. Среднее арифметическое элементов массива (без цикла)
 $numbers = [4, 8, 15, 16, 23, 42];
 $average = array_sum($numbers) / count($numbers);
