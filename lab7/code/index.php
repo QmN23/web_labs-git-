@@ -12,12 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category = $mysqli->real_escape_string($_POST['category']);
     $description = $mysqli->real_escape_string($_POST['description']);
 
+    // SQL-запрос на добавление объявления в таблицу ad
     $query = "INSERT INTO ad (email, title, description, category) VALUES ('$email', '$title', '$description', '$category')";
     $mysqli->query($query);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 $advertisements = [];
+// Выполнение SQL-запроса: получить все объявления, отсортированные по времени создания
 if ($result = $mysqli->query('SELECT * FROM ad ORDER BY created DESC')) {
+    // Перебираем строки результата и сохраняем каждую в массив $advertisements
     while ($row = $result->fetch_assoc()) {
         $advertisements[] = $row;
     }
@@ -61,13 +66,17 @@ $mysqli->close();
 </div>
     <div id="table">
         <table>
-            <thead>
-            <th>Категория</th>
-            <th>Заголовок</th>
-            <th>Описание</th>
-            </thead>
             <tbody>
-
+            <?php foreach ($advertisements as $ad): ?>
+                <div class="ad">
+                    <h3>Заголовок: <?= htmlspecialchars($ad['title']) ?></h3>
+                    <p><?= nl2br(htmlspecialchars($ad['description'])) ?></p>
+                    <small>
+                        Категория: <?= htmlspecialchars($ad['category']) ?><br>
+                        Email: <?= htmlspecialchars($ad['email']) ?>
+                    </small>
+                </div>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
